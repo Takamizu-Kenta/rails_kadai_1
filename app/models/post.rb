@@ -6,19 +6,23 @@ class Post < ApplicationRecord
   validate :start_end_check
 
   def start_end_check
+    if start_date_at != nil
     errors.add(:end_date_at, "は開始日より前の日付は登録できません。") unless
     self.start_date_at < self.end_date_at 
+    end
     end
     
 #  end
 
-#  validate :date_before_start
+ validate :date_before_start
 
 
-#  def date_before_start
-#    errors.add(:start_date_at, "は今日以降のものを選択してください") if
-#    start_date_at < Date.today
-#  end
+ def date_before_start
+  if start_date_at != nil
+   errors.add(:start_date_at, "は今日以降のものを選択してください") if
+   start_date_at < Date.today
+  end
+ end
 
 
   # def start_date_at
